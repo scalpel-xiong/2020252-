@@ -51,3 +51,70 @@ int main()
 	return 0;
 }
 
+2020.10.28
+1.输入一个不多于3位的正整数，输出它是几位数
+#include<stdio.h>
+int main()
+{
+	int num,tens,hundreds;//tens十位数，hundreds百位数
+	printf("请输入一个不多于三位的正整数：");
+	scanf("%d",&num);
+	hundreds=num/100;
+	tens=num/10;
+	if (hundreds!=0)//!=是不等号
+		printf("%d是三位数\n",num);
+	else if(tens!=0)
+		printf("%d是两位数\n",num);
+	else
+		printf("%d是一位数\n",num);
+	return 0;
+}
+
+2.定义小写字母a，b把它换成大写字母（根据ASCII码）并在下一行写出A，B所对应的ASCII值
+#include<stdio.h>
+int main()
+{
+	char c1='a',c2='b';//字符变量赋值要用单引号
+	c1=c1-32;//大写字母和小写字母ASCII码值差32
+	c2=c2-32;
+	printf("%c,%c\n%d,%d\n",c1,c2,c1,c2);
+	return 0;
+}
+
+3.将“suep”翻译成密码，密码规律是:用原来字母后第二个字母代替原来的字母（uwgr）（要用给每一个字母赋初值并使其经过运算的方法来计算)
+直接输出：
+#include<stdio.h>
+int main()
+{
+	char c1='s',c2='u',c3='e',c4='p';
+	c1=c1+2;
+	c2=c2+2;
+	c3=c3+2;
+	c4=c4+2;
+	putchar(c1);//putchar(c)，将字符c输出到屏幕上
+	putchar(c2);
+	putchar(c3);
+	putchar(c4);
+	printf("\n");
+	return 0;
+}
+数组：
+#include<stdio.h>
+int main()
+{
+	char c[3];
+	int i;
+	printf("请输入四位口令：");
+	for (i=0;i<=3;i++)
+	{
+		c[i]=getchar()+2;
+	}
+	printf("密码为：");
+	for(i=0;i<=3;i++)
+	{
+		putchar(c[i]);//printf("%c",c[i]),两种语句均可
+	}
+	printf("\n");
+	return 0;
+}
+
