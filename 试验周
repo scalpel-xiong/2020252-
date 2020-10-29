@@ -118,3 +118,88 @@ int main()
 	return 0;
 }
 
+2020.10.29
+1.该代码中有多个错误，将其改正，使其能正常运行
+#include<studio.h>
+main()
+{
+	int a,b,c,max;
+	printf("请输入三个整数:");
+	scanf("%d,%d,%d",a,b,c);
+	if a>b
+		max=a;
+	else 
+		max=b;
+	if c>max
+		max=c;
+	printf("这三个值中的最大值为:%d\n",&max);
+	return 0
+
+}
+修改后：
+#include<stdio.h> //stdio
+int main()//int
+{
+	int a,b,c,max;
+	printf("请输入三个整数:");
+	scanf("%d,%d,%d",&a,&b,&c);//scanf要有取地址运算&
+	if (a>b)//条件要打括号
+		max=a;
+	else
+		max=b;
+	if (c>max)//同上
+		max=c;
+	printf("这三个值中的最大值为:%d\n",max);//printf不用取地址
+	return 0;//语句结束要用;
+}
+
+2.一球从100米高度自由落下，每次落地后反跳回原高度的一半，再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+#include<stdio.h>
+int main()
+{
+	int i,n;//i作为循环变量，n为下落次数
+	float height,s;//height为反弹高度，s为经过的路程
+	s=0;
+	height=100.0;
+	printf("请输入下落次数：");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)//循环次数为下落次数
+	{
+		if (i==1)
+		s=s+height;//第一次下落路程只有下落没有上升，要单独列出
+		else
+		s=s+height*2.0;
+		height=height/2.0;//浮点型和整型做除法，会得到整型，需要把2写成2.0
+	}
+	printf("第%d次落地时，共经过%f米\n第%d次反弹高度为%f米\n",n,s,n,height);
+	return 0;
+}
+
+3. 输入年月，输出该月的天数。要求：使用switch语句。闰年算法：四年一闰，百年不闰，四百年再闰
+#include<stdio.h>
+int main()
+{
+	int day,month,year;
+	printf("请输入年份：");
+	scanf("%d",&year);
+	printf("请输入月份：");
+	scanf("%d",&month);
+	switch(month)
+	{
+	case 1:case 3:case 5:case 7:case 8:case 10:case 12:
+		day=31;////switch语句相同情况可以合并
+		break;
+	case 4:case 6:case 9:case 11:
+		day=30;
+		break;
+	case 2://闰年算法：是4的倍数且不是100的倍数，或是400的倍数
+		if ((year%4==0) && (year%100!=0) || (year%400==0))
+			day=29;
+		else
+			day=28;
+		break;
+	}
+	printf("%d年%d月天数为%d天\n",year,month,day);
+	return 0;
+}
+
