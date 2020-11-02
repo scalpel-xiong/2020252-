@@ -279,3 +279,70 @@ int main()
 	return 0;
 }
 
+2020.11.02
+1.输入三个整数x,y,z,请把这三个数由小到大输出
+#include <stdio.h>
+int main()
+{
+	int x,y,z,t;
+	printf("请输入三个整数：");
+	scanf("%d %d %d",&x,&y,&z);
+	t=x;
+	if (x>y)//一二位排序
+	{
+		x=y;
+		y=t;
+	}
+	t=x;
+	if (x>z)//找出最小数，放在第一位
+	{
+		x=z;
+		z=t;
+	}
+	t=y;
+	if (y>z)//此时第一位必定是最小数，进行二三位排序
+	{
+		y=z;
+		z=t;
+	}
+	printf("%d %d %d",x,y,z);
+	return 0;
+}
+
+2. 定义一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，输出这个数的值
+#include<stdio.h>
+#include<math.h>//sqrt函数在math.h头文件中，需要预编译
+#define max 210000000
+int main()
+{
+	int x,n;
+	for (x=0;x<max;x++)
+	{
+		if (sqrt(x+100)==(int) sqrt(x+100) && sqrt(x+268)==(int)sqrt(x+268))//sqrt求平方根
+			break;
+	}		
+	printf("%d\n",x);
+	return 0;
+}
+
+3. 输入一个5位数，判断它是否为回文数（回文数：正读倒读都一样，如12321）
+#include<stdio.h>
+int main()
+{
+	int x,i1,i2,i3,i4,i5,t;
+	t=0;
+	printf("请输入一个五位数：");
+	scanf("%d",&x);
+	i1=x/10000;
+	i2=(x-10000*i1)/1000;
+	i3=(x-10000*i1-1000*i2)/100;
+	i4=(x-10000*i1-1000*i2-100*i3)/10;
+	i5=x%10;
+	if (i1==i5 && i2==i4)
+		t=1;
+	if (t)//if后的条件是逻辑运算的结果，分0和非0，非0即执行
+		printf("%d是回文数\n",x);
+	else
+		printf("%d是不回文数\n",x);
+	return 0;
+}
