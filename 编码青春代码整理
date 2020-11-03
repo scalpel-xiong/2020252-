@@ -346,3 +346,76 @@ int main()
 		printf("%d是不回文数\n",x);
 	return 0;
 }
+
+2020.11.03
+1. 双十一来临，小明想要购买一些食品。已知食品有两类优惠券，分别是100-10，200-20以此类推，上不封顶的满减券，和满400打9.5折，满500打8.5折，满600打7.5折，最多7.5折的折扣券。两类优惠券不可同时使用。且购物平台有每满400-50的津贴，津贴根据实际支付金额确定能否使用及使用额度。津贴可与优惠券同时使用。
+请设计一个程序，输入商品总价，输出最省钱的优惠券和津贴搭配方式、总优惠金额及实际支付金额。
+如：输入422
+输出：优惠券种类：折扣券，津贴额度：50.00元，总优惠金额：71.10元，实际支付金额：350.90元
+#include<stdio.h>
+int main()
+{
+	float price,sale_1,sale_2,cut;//price总价，sale_1满减券，sale_2折扣券，pay支付金额
+	int bonus_1,bonus_2;//bonus_1满减券津贴，bonus_2折扣券津贴
+	printf("请输入商品总价：");
+	scanf("%f",&price);
+	sale_1=price-(price/100)*10;//每满100-10元
+	bonus_1=(int)(sale_1/400)*50;//计算满减券情况下的津贴数
+	sale_1=sale_1-bonus_1;//实付=满减后-津贴
+	if (price>=400 && price<500)//判断具体折扣
+		sale_2=price*0.95;
+	if (price>=500 && price<600)
+		sale_2=price*0.85;
+	if (price>=600)
+		sale_2=price*0.75;
+	bonus_2=(int)(sale_2/400)*50;//使用折扣的津贴
+	sale_2=sale_2-bonus_2;
+	if (sale_1<sale_2)
+	{
+		cut=price-sale_1;
+		printf("优惠券种类：满减券，津贴额度：%d元，总优惠金额：%.2f元，实际支付金额：%.2f元\n",bonus_1,cut,sale_1);
+	}
+	else if (sale_1>sale_2)
+	{
+		cut=price-sale_2;
+		printf("优惠券种类：折扣券，津贴额度：%d元，总优惠金额：%.2f元，实际支付金额：%.2f元\n",bonus_2,cut,sale_2);
+	}
+	else if (sale_1=sale_2)
+	{
+		cut=price-sale_1;
+		printf("优惠券种类：两种优惠券优惠金额相同，津贴额度：%d元，总优惠金额：%.2f元，实际支付金额：%.2f\n",bonus_1,cut,sale_1);
+	}
+	return 0;
+}
+
+2. 输入一个正整数n，计算1！+2！+3！+…+n！
+#include<stdio.h>
+int main()
+{
+	int n,i,t,sum;
+	printf("请输入正整数n：");
+	scanf("%d",&n);
+	sum=0;t=1;
+	for (i=1;i<=n;i++)
+	{
+		t=t*i;
+		sum=sum+t;
+	}
+	printf("%d\n",sum);
+	return 0;
+}
+
+3. 编写一个程序计算：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？ 
+#include<stdio.h>
+#include<math.h>//pow函数在math.h头文件中
+int main()
+{
+	int month,rabbit,t;
+	printf("请输入月份数：");
+	scanf("%d",&month);
+	t=month/3;
+	rabbit=pow(2,t+1);//pow(x,y)表示x的y次方
+	printf("截至第%d月，共有%d只兔子\n",month,rabbit);
+	return 0;
+}
+
