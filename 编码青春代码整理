@@ -513,3 +513,69 @@ int main()
 	return 0;
 }
 
+2020.11.05
+1. 输入一个正整数，如果是完全平方数，输出true，如果不是，输出false。要求：不得使用sqrt求根函数
+#include<stdio.h>
+int main()
+{
+	int n,i,s,m;
+	s=0;m=0;
+	printf("请输入正整数n：");
+	scanf("%d",&n);
+	for (i=1;i<=n;i=i+2)//完全平方数必为1为首项，2为公差的等差数列之和
+	{
+		s=s+i;
+		if (s==n)
+			m=1;//m作为指示数
+	}
+	if (m)
+		printf("True\n");
+	else
+		printf("False\n");
+	return 0;
+}
+
+2. 2.使用公式︒C=(5/9)(°F-32）打印下列华氏温度与摄氏温度对照表：（提示可以使用到while或者for语句）
+0    -17
+20   -6
+40   4
+60   15
+80   26
+100  37
+120  48
+140  60
+160  71
+180  82
+200  93
+220  104
+240  115
+260  126
+280  137
+300  148
+#include<stdio.h>
+int main()
+{
+	int c,f;
+	printf("℉\t℃\n");
+	for (f=0;f<=300;f=f+20)
+	{
+		c=(f-32)*5/9;
+		printf("%d\t%d\n",f,c);
+	}
+	return 0;
+}
+
+3. 编写程序，输入两个整数，求出它们的商和余数并输出
+#include<stdio.h>
+int main()
+{
+	int i1,i2,s,y;
+	printf("请输入两个整数：");
+	scanf("%d %d",&i1,&i2);
+	s=i1/i2;
+	y=i1-i2*s;
+	printf("%d÷%d=%d···%d\n",i1,i2,s,y);
+	return 0;
+}
+
+
