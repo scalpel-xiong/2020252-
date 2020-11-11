@@ -279,6 +279,24 @@ int main()
 	return 0;
 }
 
+2020.11.01
+1. 输入一个三位数，将它反向输出。如果不是三位数，则输出0。如输入123，输出321；输入1234，输出0
+#include<stdio.h>
+int main()
+{
+	int num,unit,ten,hundred;//unit个位，ten十位，hundred百位
+	printf("请输入一个三位数：");
+	scanf("%d",&num);
+	hundred=num/100;//取百位
+	unit=num%10;//取个位
+	ten=(num%100-unit)/10;//取十位
+	if (num>=100 && num<=999)//判断是否是三位数
+		printf("%d→%c%c%c\n",num,unit+'0',ten+'0',hundred+'0');//输出字符，防止原数个位是0
+	else
+		printf("0\n");
+	return 0;
+}
+
 2020.11.02
 1.输入三个整数x,y,z,请把这三个数由小到大输出
 #include <stdio.h>
@@ -578,7 +596,7 @@ int main()
 	return 0;
 }
 
-2020.11.07
+2020.11.06
 1. 输入两个正整数，求出它们的最小公倍数和最大公约数
 #include<stdio.h>
 int main()
@@ -635,7 +653,7 @@ int main()
 	return 0;
 }
 
-2020.11.08
+2020.11.07
 1.求出100~300的素数和
 #include<stdio.h>
 int main()
@@ -673,7 +691,7 @@ int main()
 	return 0;
 }
 
-2020.11.09
+2020.11.08
 1. 编程计算1~200中所有能被3整除但不能被5整除的整数之和
 #include<stdio.h>
 int main()
@@ -686,6 +704,216 @@ int main()
 			s+=i;
 	}
 	printf("%d\n",s);
+	return 0;
+}
+
+2020.11.09
+1. 如果一个数既不是7的倍数，各位数字中也没有7，称它为7的不相关数。输入n，输出小于n的所有7的不相关数
+#include<stdio.h>
+int main()
+{
+	int n,i,t,k;
+	printf("请输入正整数n：");
+	scanf("%d",&n);
+	t=1;
+	for(i=1;i<=n;i++)
+	{
+		k=0;
+		t=i;
+		if(i%7!=0 && t%10!=7)
+		{
+			t=t/10;
+			k++;
+			if(t=0)
+				break;
+		}
+		if(k>0)
+			printf("%d ",i);
+	}
+	return 0;
+}
+
+2. 输入三角形的三边长，求三角形面积
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	float a,b,c,s,h;
+	printf("请输入三角形三条边长，并用\",\"隔开:\n");
+	scanf("%f,%f,%f",&a,&b,&c);
+	h=(a+b+c)/2;
+	s=sqrt(h*(h-a)*(h-b)*(h-c));
+	if(s<=0)
+		printf("您输入的边长不能构成三角形。\n");
+	else
+		printf("三角形的面积为%.2f\n",s);
+	return 0;
+}
+3. 输入三条边，判断其是否能成为三角形
+#include<stdio.h>
+int main()
+{
+	float a,b,c;
+	printf("请输入三条边长：");
+	scanf("%d %d %d",&a,&b,&c);
+	if(a+b<=c || a+c<=b || b+c<=a)
+		printf("false\n");
+	else
+		printf("true\n");
+	return 0;
+}
+
+2020.11.10
+1. 有1,2,3,4四个数字，能组成多少个互不相同且无重复的数字的三位数？都是多少?
+#include<stdio.h>
+int main()
+{
+	int i,j,k,t;
+	t=0;
+    for(i=1;i<5;i++)
+	{ 
+        for(j=1;j<5;j++)
+		{
+            for (k=1;k<5;k++)
+			{   
+                if (i!=k && i!=j && j!=k)
+				{
+					t++;
+                    printf("%d%d%d ",i,j,k);
+				}
+            }
+        }
+    }
+	printf("\n可以组成%d个三位数\n",t);
+	return 0;
+}
+
+2. 输入一行字符，分别统计出其中英语字母，空格，数字和其他字符的个数
+#include<stdio.h>
+int main()
+{
+	int word,space,number,other;
+	char ch;
+	word=0;space=0;number=0;other=0;
+	do
+	{
+		ch=getchar();
+		if(ch>='0' && ch<='9')
+		{	number++;}
+		else if((ch>='a' && ch<='z') || (ch>='A' && ch<='Z'))
+		{	word++;}
+		else if(ch==' ')
+		{	space++;}
+		else if(ch<'0' || ch>'z' || (ch>'9' && ch<'A') || (ch>'Z' && ch<'a'))
+		{	other++;}
+	}
+	while(ch!='\n');
+	printf("共有%d个英语字母，%d个空格，%d个数字，%d个其他字符\n",word,space,number,other-1);//其他字符数要减去最后的回车
+	return 0;
+}
+
+3. 计算1/1-1/2+1/3-1/4+1/5 …… + 1/99 - 1/100 的值。
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	float i,s,t;
+	s=0;
+	for(i=1;i<101;i++)
+	{
+		t=pow(-1,i+1)*1.0/i;
+		s+=t;
+	}
+	printf("%f\n",s);
+	return 0;
+}
+
+2020.11.11
+1.n块砖n个人搬（n是整数），男搬4，女搬3，两个小孩抬一砖，男、女、小孩各若干，刚好一次搬完砖？
+#include<stdio.h>
+int main()
+{
+	int brick,man,woman,kid;
+	printf("输入砖块数：");
+	scanf("%d",&brick);
+	for(man=0;man<=brick;man++)
+	{
+		for(woman=0;woman<=brick;woman++)
+		{
+			for(kid=0;kid<=brick;kid+=2)
+			{
+				if((4*man+3*woman+0.5*kid==brick) && (man+woman+kid==brick))
+					printf("男%d人，女%d人，小孩%d人\n",man,woman,kid);
+			}
+		}
+	}
+	return 0;
+}
+
+2. 输入一个整数，判断它是否为素数
+#include<stdio.h>
+int main()
+{
+	int n,i,t;
+	printf("请输入正整数n：");
+	scanf("%d",&n);
+	t=0;
+	for(i=1;i<=n;i++)
+	{
+		if(n%i==0)
+			t++;
+	}
+	if(t==2)
+	{	printf("True\n");}
+	else
+	{	printf("Flase\n");}
+	return 0;
+}
+
+3. 输入某年某月某日，判断这一天是这一年的第几天
+#include<stdio.h>
+int main()
+{
+	int year,month,day,sum;
+	printf("请输入年、月、日：");
+	scanf("%d%d%d",&year,&month,&day);
+	if((year%4==0 && year%100!=0) || (year%400==0))
+	{
+		switch(month)
+		{
+		case 1:sum=day;break;
+		case 2:sum=31+day;break;
+		case 3:sum=60+day;break;
+		case 4:sum=91+day;break;
+		case 5:sum=121+day;break;
+		case 6:sum=152+day;break;
+		case 7:sum=182+day;break;
+		case 8:sum=213+day;break;
+		case 9:sum=244+day;break;
+		case 10:sum=274+day;break;
+		case 11:sum=305+day;break;
+		case 12:sum=335+day;break;
+		}
+	}
+	else
+	{
+		switch(month)
+		{
+		case 1:sum=day;break;
+		case 2:sum=31+day;break;
+		case 3:sum=59+day;break;
+		case 4:sum=90+day;break;
+		case 5:sum=120+day;break;
+		case 6:sum=151+day;break;
+		case 7:sum=181+day;break;
+		case 8:sum=212+day;break;
+		case 9:sum=243+day;break;
+		case 10:sum=273+day;break;
+		case 11:sum=304+day;break;
+		case 12:sum=334+day;break;
+		}
+	}
+	printf("%d年%d月%d日是%d年中的第%d天\n",year,month,day,year,sum);
 	return 0;
 }
 
