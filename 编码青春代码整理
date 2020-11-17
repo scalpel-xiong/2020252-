@@ -917,4 +917,178 @@ int main()
 	return 0;
 }
 
+2020.11.12
+1. 输入一串字母，输出每个字母的后一位，如果输入的是z，则输出a。如：输入xyz，输出yza
+（要求：使用数组）
+#include<stdio.h>
+int main()
+{
+	char c[128];
+	int i,j;
+	printf("请输入字符串：");
+	for(i=0;i<128;i++)
+	{
+		c[i]=getchar();
+		if(c[i]=='\n')
+			break;
+		c[i]=c[i]+1;
+		if(c[i]!='z'+1 && c[i]!='Z'+1)
+			putchar(c[i]);
+		else if(c[i]=='z'+1)
+			printf("a");
+		else if(c[i]=='Z'+1)
+			printf("A");
+	}
+
+	printf("\n");
+	return 0;
+}
+
+2. 将大写字母a转化为小写字母（用if语句）
+#include<stdio.h>
+int main()
+{
+	char c;
+	c='A';
+	if(c=='A')
+		c+=32;
+	printf("%c\n",c);
+	return 0;
+}
+
+2020.11.13
+1. 输入10个数，将它们从小到大排列并输出
+#include<stdio.h>
+int main()
+{
+	int a[10],i,j,t;
+	for(i=0;i<10;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	for(i=0;i<10;i++)
+	{
+		for(j=i+1;j<10;j++)
+		{
+			if(a[j]<a[i])
+			{
+				t=a[i];
+				a[i]=a[j];
+				a[j]=t;
+			}
+		}
+	}
+	for(i=0;i<10;i++)
+	{
+		printf("%d ",a[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+2020.11.14
+1. 输入一个正整数，将各位数字重新组合成一个最小的正整数。如输入：64210，输出：1246
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int a[10],n,i,j,k,t,sum;
+	printf("请输入一个正整数：");
+	scanf("%d",&n);
+	i=0;
+	while(n!=0)//取每一位的数
+	{
+		a[i]=n%10;
+		n/=10;
+		if(n==0)
+			break;
+		i++;
+	}
+	for(j=0;j<=i;j++)//进行降序排序
+	{
+		for(k=j+1;k<=i;k++)
+		{
+			if(a[k]>a[j])
+			{
+				t=a[j];
+				a[j]=a[k];
+				a[k]=t;
+			}
+		}
+	}
+	sum=0;
+	for(j=0;j<=i;j++)
+	{
+		sum=sum+a[j]*pow(10,j);
+	}
+	printf("%d\n",sum);
+	return 0;
+}
+
+2. 进阶：输入一个正整数，将各位数字重新组合成位数相同的一个最小的正整数。如输入：64210，输出：10246
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int a[10],n,i,j,k,t,sum,s;
+	printf("请输入一个正整数：");
+	scanf("%d",&n);
+	i=0;
+	while(n!=0)//取每一位的数
+	{
+		a[i]=n%10;
+		n/=10;
+		if(n==0)
+			break;
+		i++;
+	}
+	for(j=0;j<=i;j++)//进行降序排序
+	{
+		for(k=j+1;k<=i;k++)
+		{
+			if(a[k]>a[j])
+			{
+				t=a[j];
+				a[j]=a[k];
+				a[k]=t;
+			}
+		}
+	}
+	sum=0;s=0;
+	for(j=0;j<=i;j++)//判断各位数字中0的个数
+	{
+		if(a[j]==0)
+			s++;
+	}
+	if(a[i]==0)//将最小非零项移到数组最后一位
+	{
+		t=a[i];
+		a[i]=a[i-s];
+		a[i-s]=t;
+	}
+	for(j=0;j<=i;j++)
+	{
+		sum=sum+a[j]*pow(10,j);
+	}
+	printf("%d\n",sum);
+	return 0;
+}
+
+2020.11.17
+1. 编写程序，实现pow（x,n）的功能，即求x的n次幂，n为自然数
+#include<stdio.h>
+int main()
+{
+	double x,multi;
+	int n,i;
+	multi=1;
+	scanf("%lf %d",&x,&n);
+	for(i=1;i<=n;i++)
+	{
+		multi*=x;
+	}
+	printf("%lf\n",multi);
+	return 0;
+}
+
 
